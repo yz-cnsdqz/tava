@@ -42,6 +42,10 @@ conda activate tava
 conda install pytorch cudatoolkit=11.3 -c pytorch
 
 python setup.py develop
+
+conda install protobuf
+conda install numpy==1.23
+
 ```
 
 ## Running the code 
