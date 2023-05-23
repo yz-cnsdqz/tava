@@ -207,7 +207,9 @@ class SubjectParser:
         return mask
 
     def _create_splits(self):
-        from tava.utils.clustering import train_val_test_split
+
+        # from tava.utils.clustering import train_val_test_split
+        from tava.utils.clustering import train_val_test_split_arah
 
         meta_data = self.load_meta_data()
         
@@ -225,7 +227,8 @@ class SubjectParser:
         }[self.subject_id]
         print ("Creating data splits using seed %d. Will Save to %s" % (seed, self.splits_dir))
 
-        splits = train_val_test_split(transform_global, verts, ncluster=10, seed=seed)        
+        # splits = train_val_test_split(transform_global, verts, ncluster=10, seed=seed)        
+        splits = train_val_test_split_arah(self.subject_id)        
         for split_name, split_ids in splits.items():
             fids = [self.frame_ids[i] for i in split_ids]
             os.makedirs(self.splits_dir, exist_ok=True)

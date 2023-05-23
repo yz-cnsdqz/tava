@@ -87,10 +87,15 @@ def eval_epoch(
                 image_path,
                 np.uint8(img_to_save.cpu().numpy() * 255.0),
             )
+            if pred_acc.shape[-1] == 1:
+                pred_acc = pred_acc[...,0]
+
             imageio.imwrite(
                 image_path.replace(".png", "_mask.png"),
                 np.uint8(pred_acc.cpu().numpy() * 255.0),
             )
+            
+
             if pred_warp.shape[-1] == 3:
                 imageio.imwrite(
                     image_path.replace(".png", ".exr"),

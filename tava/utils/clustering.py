@@ -145,8 +145,64 @@ def train_val_test_split(transform_global, verts, ncluster=10, seed=None):
         [ids_train, ids_val_ind, ids_val_ood, ids_test]
     ).unique().shape[0] == total_size
 
+
     return {
         "all": torch.arange(total_size),
         "train": ids_train,  "test": ids_test,
         "val_ind": ids_val_ind, "val_ood": ids_val_ood,
     }
+
+
+@torch.no_grad()
+def train_val_test_split_arah(subject_id):
+    # according to the table of: https://github.com/zju3dv/neuralbody/blob/master/supplementary_material.md
+    eval_dict = {
+        '313': {
+                "all": torch.arange(1470),
+                "train": torch.arange(0,60),  "test": torch.arange(60,1061),
+                "val_ind": torch.arange(0,2), "val_ood": torch.arange(0,2),
+            },
+        '315': {
+            "all": torch.arange(2185),
+            "train": torch.arange(0,400),  "test": torch.arange(400,1401),
+            "val_ind": torch.arange(0,2), "val_ood": torch.arange(0,2),
+        },
+        '377': {
+                "all": torch.arange(617),
+                "train": torch.arange(0,300),  "test": torch.arange(300,618),
+                "val_ind": torch.arange(0,2), "val_ood": torch.arange(0,2),
+            },
+        '386': {
+                "all": torch.arange(646),
+                "train": torch.arange(0,300),  "test": torch.arange(300,647),
+                "val_ind": torch.arange(0,2), "val_ood": torch.arange(0,2),
+            },
+        '387': {
+                "all": torch.arange(654),
+                "train": torch.arange(0,300),  "test": torch.arange(300,655),
+                "val_ind": torch.arange(0,2), "val_ood": torch.arange(0,2),
+            },
+        '390': {
+                "all": torch.arange(1171),
+                "train": torch.arange(700,1000),  "test": torch.arange(0,701),
+                "val_ind": torch.arange(0,2), "val_ood": torch.arange(0,2),
+            },
+        '392': {
+                "all": torch.arange(556),
+                "train": torch.arange(0,300),  "test": torch.arange(300,557),
+                "val_ind": torch.arange(0,2), "val_ood": torch.arange(0,2),
+            },
+        '393': {
+                "all": torch.arange(658),
+                "train": torch.arange(0,300),  "test": torch.arange(300,659),
+                "val_ind": torch.arange(0,2), "val_ood": torch.arange(0,2),
+            },
+        '394': {
+                "all": torch.arange(859),
+                "train": torch.arange(0,300),  "test": torch.arange(300,860),
+                "val_ind": torch.arange(0,2), "val_ood": torch.arange(0,2),
+            },
+    }
+
+
+    return eval_dict[str(subject_id)]
